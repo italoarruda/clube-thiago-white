@@ -1,551 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clube de Desbravadores Thiago White</title>
   <style>
-    /* ── Reset básico ── */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #f0f4f8;
-      color: #1e293b;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
-    a { text-decoration: none; color: inherit; }
-
-    /* ── Cabeçalho ── */
+    /* CABEÇALHO */
     header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
-      color: #fff;
-      padding: 0 24px;
+      background: #1e3a8a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* LAYOUT: menu + conteúdo lado a lado */
+    .pagina {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.25);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .header-logo .emblem {
-      width: 48px;
-      height: 48px;
-      background: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-    }
-
-    .header-logo h1 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .header-logo p {
-      font-size: 0.75rem;
-      opacity: .8;
-    }
-
-    .header-info {
-      font-size: 0.8rem;
-      text-align: right;
-      opacity: .85;
-    }
-
-    /* ── Layout principal ── */
-    .wrapper {
-      display: flex;
-      flex: 1;
-    }
-
-    /* ── Menu lateral ── */
+    /* MENU ESQUERDO */
     nav {
-      width: 220px;
+      width: 200px;
       background: #1e293b;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    nav a {
+      display: block;
       color: #cbd5e1;
-      flex-shrink: 0;
-      padding-top: 24px;
+      padding: 12px 20px;
+      text-decoration: none;
     }
 
-    nav .nav-section {
-      padding: 0 12px 16px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #64748b;
+    nav a:hover {
+      background: #334155;
+      color: white;
     }
 
-    nav ul { list-style: none; }
-
-    nav ul li a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      font-size: 0.875rem;
-      border-left: 3px solid transparent;
-      transition: background .15s, border-color .15s, color .15s;
-    }
-
-    nav ul li a:hover,
-    nav ul li a.ativo {
-      background: rgba(255,255,255,.07);
-      border-left-color: #3b82f6;
-      color: #fff;
-    }
-
-    nav ul li a .icon { font-size: 1rem; width: 20px; text-align: center; }
-
-    nav .nav-sep { height: 1px; background: #334155; margin: 12px 16px; }
-
-    /* ── Conteúdo principal ── */
+    /* CORPO */
     main {
       flex: 1;
-      padding: 28px 32px;
-      overflow-y: auto;
-    }
-
-    /* ── Banners animados ── */
-    .banners { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-
-    /* Banner 1 — slide de cores */
-    .banner-1 {
-      border-radius: 12px;
-      padding: 28px 36px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      overflow: hidden;
-      position: relative;
-      animation: slide-bg 8s ease-in-out infinite;
-    }
-
-    @keyframes slide-bg {
-      0%   { background: linear-gradient(120deg, #1d4ed8, #7c3aed); }
-      33%  { background: linear-gradient(120deg, #0f766e, #0891b2); }
-      66%  { background: linear-gradient(120deg, #b45309, #dc2626); }
-      100% { background: linear-gradient(120deg, #1d4ed8, #7c3aed); }
-    }
-
-    .banner-1 .banner-text h2 { font-size: 1.3rem; margin-bottom: 4px; }
-    .banner-1 .banner-text p  { font-size: 0.85rem; opacity: .9; font-weight: 400; }
-
-    .banner-1 .banner-badge {
-      background: rgba(255,255,255,.2);
-      border: 2px solid rgba(255,255,255,.4);
-      border-radius: 50%;
-      width: 64px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      animation: spin-slow 6s linear infinite;
-    }
-
-    @keyframes spin-slow { to { transform: rotate(360deg); } }
-
-    /* Banner 2 — marquee / texto deslizante */
-    .banner-2 {
-      background: #0f172a;
-      border-radius: 12px;
-      padding: 16px 0;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid #334155;
-    }
-
-    .banner-2-label {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 110px;
-      background: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      z-index: 2;
-    }
-
-    .marquee-track {
-      display: flex;
-      white-space: nowrap;
-      animation: marquee 22s linear infinite;
-      padding-left: 110px;
-    }
-
-    .marquee-track:hover { animation-play-state: paused; }
-
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .marquee-track span {
-      color: #94a3b8;
-      font-size: 0.875rem;
-      padding: 0 32px;
-    }
-
-    .marquee-track span strong { color: #60a5fa; }
-
-    /* ── Cards de info ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: transform .15s, box-shadow .15s;
-    }
-
-    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
-
-    .card .card-icon { font-size: 2rem; }
-    .card .card-value { font-size: 1.8rem; font-weight: 800; color: #1e3a8a; }
-    .card .card-label { font-size: 0.8rem; color: #64748b; }
-
-    /* ── Seção sobre ── */
-    .section-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1e3a8a;
-      border-left: 4px solid #1d4ed8;
-      padding-left: 10px;
-      margin-bottom: 14px;
-    }
-
-    .sobre-box {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
       padding: 24px;
-      margin-bottom: 28px;
-      line-height: 1.7;
-      color: #334155;
-      font-size: 0.9rem;
     }
 
-    .sobre-box p + p { margin-top: 10px; }
-
-    /* ── Valores ── */
-    .valores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .valor-item {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
+    /* BANNER 1 - pulsa */
+    .banner1 {
+      background: #1d4ed8;
+      color: white;
+      padding: 24px;
       border-radius: 10px;
-      padding: 16px;
       text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+      animation: pulsar 2s ease-in-out infinite;
     }
 
-    .valor-item .valor-icon { font-size: 1.6rem; margin-bottom: 6px; }
-    .valor-item h3 { font-size: 0.85rem; font-weight: 700; color: #1e3a8a; margin-bottom: 4px; }
-    .valor-item p { font-size: 0.75rem; color: #475569; }
+    @keyframes pulsar {
+      0%   { transform: scale(1);    background: #1d4ed8; }
+      50%  { transform: scale(1.02); background: #7c3aed; }
+      100% { transform: scale(1);    background: #1d4ed8; }
+    }
 
-    /* ── Rodapé ── */
-    footer {
+    /* BANNER 2 - texto deslizante */
+    .banner2 {
       background: #0f172a;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .banner2 span {
+      display: inline-block;
+      white-space: nowrap;
+      animation: deslizar 12s linear infinite;
+    }
+
+    @keyframes deslizar {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* RODAPÉ */
+    footer {
+      background: #1e293b;
       color: #94a3b8;
-      padding: 28px 32px;
-    }
-
-    .footer-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    footer h4 { color: #e2e8f0; font-size: 0.85rem; margin-bottom: 10px; }
-
-    footer ul { list-style: none; }
-
-    footer ul li { margin-bottom: 6px; font-size: 0.8rem; }
-
-    footer ul li a { color: #94a3b8; transition: color .15s; }
-    footer ul li a:hover { color: #60a5fa; }
-
-    footer p { font-size: 0.78rem; line-height: 1.6; }
-
-    .footer-bottom {
       text-align: center;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #1e293b;
-      font-size: 0.75rem;
-      color: #475569;
+      padding: 20px;
     }
+
   </style>
 </head>
+
 <body>
 
-  <!-- ═══════════════════════════════════════
-       CABEÇALHO
-  ═══════════════════════════════════════ -->
+  <!-- CABEÇALHO -->
   <header>
-    <div class="header-logo">
-      <div class="emblem">⚜️</div>
-      <div>
-        <h1>Clube de Desbravadores</h1>
-        <p>Thiago White — Fortaleza / CE</p>
-      </div>
-    </div>
-    <div class="header-info">
-      <div>📅 <span id="data-atual"></span></div>
-      <div>Associação Geral da IASD</div>
-    </div>
+    <h1>⚜️ Clube de Desbravadores Thiago White</h1>
+    <p>Fortaleza — CE</p>
   </header>
 
-  <div class="wrapper">
+  <div class="pagina">
 
-    <!-- ═══════════════════════════════════════
-         MENU LATERAL
-    ═══════════════════════════════════════ -->
+    <!-- MENU ESQUERDO -->
     <nav>
-      <div class="nav-section">Principal</div>
-      <ul>
-        <li><a href="#inicio" class="ativo"><span class="icon">🏠</span> Início</a></li>
-        <li><a href="#sobre"><span class="icon">ℹ️</span> Sobre o Clube</a></li>
-        <li><a href="#valores"><span class="icon">⭐</span> Nossos Valores</a></li>
-      </ul>
-
-      <div class="nav-sep"></div>
-      <div class="nav-section">Sistema</div>
-      <ul>
-        <li><a href="./app/dashboard" target="_blank"><span class="icon">📊</span> Dashboard</a></li>
-        <li><a href="./app/cadastros/desbravadores" target="_blank"><span class="icon">👥</span> Desbravadores</a></li>
-        <li><a href="./app/mensalidades" target="_blank"><span class="icon">💰</span> Mensalidades</a></li>
-        <li><a href="./app/caixa" target="_blank"><span class="icon">🏦</span> Caixa</a></li>
-        <li><a href="./app/patrimonio" target="_blank"><span class="icon">📦</span> Patrimônio</a></li>
-        <li><a href="./app/atas" target="_blank"><span class="icon">📄</span> Atas</a></li>
-        <li><a href="./app/atos" target="_blank"><span class="icon">🗂️</span> Atos</a></li>
-        <li><a href="./app/relatorios" target="_blank"><span class="icon">📋</span> Relatórios</a></li>
-      </ul>
-
-      <div class="nav-sep"></div>
-      <div class="nav-section">Documentação</div>
-      <ul>
-        <li><a href="./docs/MANUAL_USUARIO.md" target="_blank"><span class="icon">📖</span> Manual do Usuário</a></li>
-        <li><a href="./docs/USAGE.md" target="_blank"><span class="icon">🔧</span> Guia Técnico</a></li>
-      </ul>
+      <a href="#inicio">🏠 Início</a>
+      <a href="#sobre">ℹ️ Sobre</a>
+      <a href="#valores">⭐ Valores</a>
+      <a href="#contato">📞 Contato</a>
     </nav>
 
-    <!-- ═══════════════════════════════════════
-         CONTEÚDO PRINCIPAL
-    ═══════════════════════════════════════ -->
+    <!-- CORPO -->
     <main>
 
-      <!-- ── Banners animados ── -->
-      <div class="banners" id="inicio">
-
-        <!-- Banner 1: slide de gradiente + ícone giratório -->
-        <div class="banner-1">
-          <div class="banner-text">
-            <h2>Bem-vindo ao Clube Thiago White!</h2>
-            <p>Sistema de gerenciamento completo para desbravadores.</p>
-          </div>
-          <div class="banner-badge">⚜️</div>
-        </div>
-
-        <!-- Banner 2: marquee com avisos deslizantes -->
-        <div class="banner-2">
-          <div class="banner-2-label">📢 Avisos</div>
-          <div class="marquee-track">
-            <span>🗓️ <strong>Reunião de Diretoria</strong> — todo primeiro sábado do mês às 14h</span>
-            <span>💰 <strong>Mensalidade</strong> — vencimento todo dia 10 &nbsp;|&nbsp;</span>
-            <span>🏕️ <strong>Acampamento 2026</strong> — inscrições abertas até 30/06 &nbsp;|&nbsp;</span>
-            <span>📋 <strong>Especialidades</strong> — novas turmas disponíveis no sistema &nbsp;|&nbsp;</span>
-            <span>📜 <strong>Ata nº 3</strong> já disponível para consulta &nbsp;|&nbsp;</span>
-            <!-- duplicata para loop contínuo -->
-            <span>🗓️ <strong>Reunião de Diretoria</strong> — todo primeiro sábado do mês às 14h</span>
-            <span>💰 <strong>Mensalidade</strong> — vencimento todo dia 10 &nbsp;|&nbsp;</span>
-            <span>🏕️ <strong>Acampamento 2026</strong> — inscrições abertas até 30/06 &nbsp;|&nbsp;</span>
-            <span>📋 <strong>Especialidades</strong> — novas turmas disponíveis no sistema &nbsp;|&nbsp;</span>
-            <span>📜 <strong>Ata nº 3</strong> já disponível para consulta &nbsp;|&nbsp;</span>
-          </div>
-        </div>
-
-      </div><!-- /banners -->
-
-      <!-- ── Cards numéricos ── -->
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-icon">👥</div>
-          <div class="card-value">24</div>
-          <div class="card-label">Desbravadores Ativos</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">🏷️</div>
-          <div class="card-value">3</div>
-          <div class="card-label">Unidades</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">🎖️</div>
-          <div class="card-value">12</div>
-          <div class="card-label">Especialidades</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">📦</div>
-          <div class="card-value">18</div>
-          <div class="card-label">Itens de Patrimônio</div>
-        </div>
+      <!-- BANNER 1: pulsa -->
+      <div class="banner1">
+        🏕️ Bem-vindo ao Clube Thiago White!
       </div>
 
-      <!-- ── Sobre o Clube ── -->
-      <h2 class="section-title" id="sobre">Sobre o Clube</h2>
-      <div class="sobre-box">
-        <p>
-          O <strong>Clube de Desbravadores Thiago White</strong> é uma organização
-          vinculada à Igreja Adventista do Sétimo Dia, dedicada ao desenvolvimento
-          integral de crianças e adolescentes entre 10 e 15 anos.
-        </p>
-        <p>
-          Por meio de atividades espirituais, educacionais, recreativas e comunitárias,
-          formamos jovens com caráter, responsabilidade e fé — preparando-os para
-          servir a Deus, à família e à sociedade.
-        </p>
-        <p>
-          O sistema de gerenciamento centraliza o controle de membros, finanças,
-          patrimônio e documentação do clube, facilitando o trabalho da diretoria
-          e garantindo transparência na gestão.
-        </p>
+      <!-- BANNER 2: texto deslizante -->
+      <div class="banner2">
+        <span>
+          📢 Mensalidade vence dia 10 &nbsp;&nbsp;|&nbsp;&nbsp;
+          🏕️ Acampamento 2026 — inscrições abertas &nbsp;&nbsp;|&nbsp;&nbsp;
+          📋 Reunião todo primeiro sábado do mês às 14h
+        </span>
       </div>
 
-      <!-- ── Nossos Valores ── -->
-      <h2 class="section-title" id="valores">Nossos Valores</h2>
-      <div class="valores-grid">
-        <div class="valor-item">
-          <div class="valor-icon">🙏</div>
-          <h3>Fé</h3>
-          <p>Fundamento em Deus em tudo que fazemos</p>
-        </div>
-        <div class="valor-item">
-          <div class="valor-icon">🤝</div>
-          <h3>Serviço</h3>
-          <p>Servir ao próximo com amor e dedicação</p>
-        </div>
-        <div class="valor-item">
-          <div class="valor-icon">🎯</div>
-          <h3>Excelência</h3>
-          <p>Dar o melhor em cada atividade</p>
-        </div>
-        <div class="valor-item">
-          <div class="valor-icon">🌱</div>
-          <h3>Crescimento</h3>
-          <p>Desenvolvimento integral do jovem</p>
-        </div>
-        <div class="valor-item">
-          <div class="valor-icon">🤜🤛</div>
-          <h3>Unidade</h3>
-          <p>Força e alegria na comunidade</p>
-        </div>
-        <div class="valor-item">
-          <div class="valor-icon">🌍</div>
-          <h3>Missão</h3>
-          <p>Levar esperança ao mundo</p>
-        </div>
-      </div>
+      <!-- CONTEÚDO -->
+      <h2 id="inicio">Início</h2>
+      <p>Sistema de gerenciamento do Clube de Desbravadores Thiago White.</p>
+
+      <h2 id="sobre">Sobre</h2>
+      <p>Clube vinculado à Igreja Adventista do Sétimo Dia, dedicado ao desenvolvimento de jovens entre 10 e 15 anos.</p>
+
+      <h2 id="valores">Valores</h2>
+      <p>Fé · Serviço · Excelência · Crescimento · Unidade</p>
+
+      <h2 id="contato">Contato</h2>
+      <p>📧 clube@email.com &nbsp; 📱 (85) 99999-9999</p>
 
     </main>
-  </div><!-- /wrapper -->
 
-  <!-- ═══════════════════════════════════════
-       RODAPÉ
-  ═══════════════════════════════════════ -->
+  </div>
+
+  <!-- RODAPÉ -->
   <footer>
-    <div class="footer-inner">
-
-      <div>
-        <h4>⚜️ Clube Thiago White</h4>
-        <p>Formando caráter e fé em cada desbravador desde a fundação do clube.</p>
-      </div>
-
-      <div>
-        <h4>Links do Sistema</h4>
-        <ul>
-          <li><a href="./app/dashboard" target="_blank">Dashboard</a></li>
-          <li><a href="./app/cadastros/desbravadores" target="_blank">Desbravadores</a></li>
-          <li><a href="./app/mensalidades" target="_blank">Mensalidades</a></li>
-          <li><a href="./app/relatorios" target="_blank">Relatórios</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Documentação</h4>
-        <ul>
-          <li><a href="./docs/MANUAL_USUARIO.md" target="_blank">Manual do Usuário</a></li>
-          <li><a href="./docs/USAGE.md" target="_blank">Guia Técnico</a></li>
-          <li><a href="https://github.com/italoarruda/clube-thiago-white" target="_blank">Repositório GitHub</a></li>
-          <li><a href="https://github.com/italoarruda/clube-thiago-white/issues" target="_blank">Reportar Problema</a></li>
-        </ul>
-      </div>
-
-    </div>
-    <div class="footer-bottom">
-      &copy; <span id="ano-rodape"></span> Clube de Desbravadores Thiago White — Todos os direitos reservados.
-    </div>
+    <p>© 2026 Clube de Desbravadores Thiago White — Todos os direitos reservados.</p>
   </footer>
-
-  <script>
-    // Data atual no cabeçalho
-    const agora = new Date()
-    const opts = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }
-    document.getElementById('data-atual').textContent =
-      agora.toLocaleDateString('pt-BR', opts)
-
-    // Ano no rodapé
-    document.getElementById('ano-rodape').textContent = agora.getFullYear()
-
-    // Destaca link ativo no menu ao clicar
-    document.querySelectorAll('nav ul li a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        document.querySelectorAll('nav ul li a').forEach(function(l) { l.classList.remove('ativo') })
-        this.classList.add('ativo')
-      })
-    })
-  </script>
 
 </body>
 </html>
