@@ -13,11 +13,22 @@ interface SelectProps {
   disabled?: boolean
 }
 
+// Radix UI does not allow empty-string values in SelectItem.
+// We use this sentinel internally and translate back to '' on change.
+const EMPTY_SENTINEL = '__empty__'
+
+function toRadix(v: string | undefined) { return v === '' ? EMPTY_SENTINEL : (v ?? EMPTY_SENTINEL) }
+function fromRadix(v: string) { return v === EMPTY_SENTINEL ? '' : v }
+
 export function Select({ label, placeholder, value, onValueChange, options, className, disabled }: SelectProps) {
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
       {label && <label className="text-sm font-medium text-[var(--foreground)]">{label}</label>}
-      <RadixSelect.Root value={value} onValueChange={onValueChange} disabled={disabled}>
+      <RadixSelect.Root
+        value={toRadix(value)}
+        onValueChange={v => onValueChange?.(fromRadix(v))}
+        disabled={disabled}
+      >
         <RadixSelect.Trigger className="flex h-9 w-full items-center justify-between rounded-lg border border-[var(--border)] bg-[var(--card-bg)] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50">
           <RadixSelect.Value placeholder={placeholder ?? 'Selecione...'} />
           <ChevronDown size={16} className="text-[var(--muted)]" />
@@ -27,8 +38,8 @@ export function Select({ label, placeholder, value, onValueChange, options, clas
             <RadixSelect.Viewport className="p-1">
               {options.map(opt => (
                 <RadixSelect.Item
-                  key={opt.value}
-                  value={opt.value}
+                  key={opt.value === '' ? EMPTY_SENTINEL : opt.value}
+                  value={opt.value === '' ? EMPTY_SENTINEL : opt.value}
                   className="flex items-center gap-2 px-3 py-2 text-sm rounded cursor-pointer hover:bg-[var(--border)] focus:bg-[var(--border)] focus:outline-none"
                 >
                   <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>
