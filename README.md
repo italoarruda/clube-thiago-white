@@ -64,7 +64,10 @@ Cobertura: 8 páginas com mocks do Supabase via Vitest + React Testing Library.
 
 ## Documentação
 
-Consulte o [Guia de Uso completo](docs/USAGE.md) para descrição detalhada de cada módulo, campos, status e relatórios disponíveis.
+| Documento | Público-alvo |
+|---|---|
+| [Manual do Usuário](docs/MANUAL_USUARIO.md) | Operadores do sistema (secretaria, tesouraria, direção) |
+| [Guia Técnico](docs/USAGE.md) | Desenvolvedores e administradores do sistema |
 
 ## Licença
 
